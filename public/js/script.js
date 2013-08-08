@@ -9,7 +9,7 @@ app.directive('uniqueUsername', ['$http', function($http) {
     link: function(scope, elem, attrs, ctrl) {
       scope.busy = false;
       scope.$watch(attrs.ngModel, function(value) {
-
+        
         // hide old error messages
         ctrl.$setValidity('isTaken', true);
         ctrl.$setValidity('invalidChars', true);
@@ -20,25 +20,23 @@ app.directive('uniqueUsername', ['$http', function($http) {
           return;
         }
         
-        if (!scope.busy) {
-          scope.busy = true;
-          $http.post('/signup/check/username', {username: value})
-            .success(function(data) {
-              // everything is fine -> do nothing
-              scope.busy = false;
-            })
-            .error(function(data) {
-              
-              // display new error message
-              if (data.isTaken) {
-                ctrl.$setValidity('isTaken', false);
-              } else if (data.invalidChars) {
-                ctrl.$setValidity('invalidChars', false);
-              }
+        scope.busy = true;
+        $http.post('/signup/check/username', {username: value})
+          .success(function(data) {
+            // everything is fine -> do nothing
+            scope.busy = false;
+          })
+          .error(function(data) {
+            
+            // display new error message
+            if (data.isTaken) {
+              ctrl.$setValidity('isTaken', false);
+            } else if (data.invalidChars) {
+              ctrl.$setValidity('invalidChars', false);
+            }
 
-              scope.busy = false;
-            })
-        }
+            scope.busy = false;
+          });
       })
     }
   }
