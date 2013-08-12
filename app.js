@@ -42,7 +42,10 @@ var dummyDb = [
 
 // reder signup page
 app.get('/signup', function(req, res) {
-  res.render('signup');
+  res.render('signup', {
+    username: '',
+    email: ''
+  });
 });
 
 // ajax target for checking username
@@ -74,7 +77,7 @@ app.post('/signup/check/username', function(req, res) {
 });
 
 // target for form submit
-app.post('/auth/signup', function(req, response) {
+app.post('/signup', function(req, response) {
 
   var username = req.body.username;
   var email = req.body.email;
@@ -99,6 +102,8 @@ app.post('/auth/signup', function(req, response) {
   if (error) {
     response.status(403);
     response.render('signup', {
+      username: username,
+      email: email,
       error: error
     });
     return
@@ -109,6 +114,8 @@ app.post('/auth/signup', function(req, response) {
     if (dummyDb[i].username === username) {
       response.status(403);
       response.render('signup', {
+        username: username,
+        email: email,
         error: 'Username is already taken'
       });
       return;
