@@ -93,10 +93,10 @@ app.post('/signup', function(req, response) {
     error = 'All fields are required';
   } else if (username !== encodeURIComponent(username)) {
     error = 'Username may not contain any non-url-safe characters';
-  } else if (password !== verification) {
-    error = 'Passwords don\'t match';
   } else if (!email.match(EMAIL_REGEXP)) {
     error = 'Email is invalid';
+  } else if (password !== verification) {
+    error = 'Passwords don\'t match';
   }
 
   if (error) {
