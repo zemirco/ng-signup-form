@@ -1,18 +1,14 @@
 body {
-    padding-top: 50px;
+  padding-top: 20px;
 }
 
-input.ng-invalid.ng-dirty,
-input.ng-invalid.ng-pristine.ng-invalid-is-taken,
-input.ng-invalid.ng-pristine.ng-invalid-invalid-chars{
+input.ng-invalid.ng-dirty {
   border-color: #b94a48;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
 }
 
-input.ng-invalid.ng-dirty ~ .help-block,
-input.ng-invalid.ng-pristine.ng-invalid-is-taken ~ .help-block,
-input.ng-invalid.ng-pristine.ng-invalid-invalid-chars ~ .help-block {
+input.ng-invalid.ng-dirty ~ .help-block {
   color: #b94a48;
 }
 
