@@ -4,8 +4,6 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
 
@@ -29,16 +27,17 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+// redirect to signup form
+app.get('/', function(req, res) {
+  res.redirect('/signup');
+});
 
+// dummy db
 var dummyDb = [
   {username: 'john', email: 'john@email.com'},
   {username: 'jack', email: 'jack@email.com'},
   {username: 'jim', email: 'jim@email.com'},
 ];
-
-// my custom routes
 
 // reder signup page
 app.get('/signup', function(req, res) {
@@ -98,24 +97,20 @@ app.post('/signup', function(req, response) {
   } else if (password !== verification) {
     error = 'Passwords don\'t match';
   }
-
+  
   if (error) {
     response.status(403);
     response.render('signup', {
-      username: username,
-      email: email,
       error: error
     });
     return
   }
 
-  // check if username is already taken - query your db here
+  // check if username is already taken
   for (var i = 0; i < dummyDb.length; i++) {
     if (dummyDb[i].username === username) {
       response.status(403);
       response.render('signup', {
-        username: username,
-        email: email,
         error: 'Username is already taken'
       });
       return;
