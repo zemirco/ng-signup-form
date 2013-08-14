@@ -7,7 +7,7 @@ block content
       form(name="form", method="post", action="/signup", novalidate)
         div.form-group
           label.control-label(for="username") Username
-          input.form-control(type="text", name="username", id="username", placeholder="Username", unique-username, required, ng-model="username")
+          input.form-control(type="text", name="username", id="username", placeholder="Username", unique-username, required, ng-model="username", autofocus)
           i.halflings-icon.refresh.rotating(ng-show="busy")
           span.help-block(ng-show="form.username.$dirty && form.username.$error.required") Please choose a username
           span.help-block(ng-show="form.username.$dirty && form.username.$error.isTaken") Username already taken
