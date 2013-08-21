@@ -41,10 +41,7 @@ var dummyDb = [
 
 // reder signup page
 app.get('/signup', function(req, res) {
-  res.render('signup', {
-    username: '',
-    email: ''
-  });
+  res.render('signup');
 });
 
 // ajax target for checking username
