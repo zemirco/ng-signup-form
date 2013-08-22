@@ -1,0 +1,1 @@
+Read my [blog post](http://mircozeiss.com/github-like-signup-form-with-angularjs-and-bootstrap-v3/) and take a look at the [live example](http://mysterious-escarpment-9591.herokuapp.com/signup).
